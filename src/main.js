@@ -4,10 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
-import VueScroller from 'vue-scroller'
-Vue.use(VueScroller)
 
-Vue.config.productionTip = false
+// vue 在启动时生成生产提示。
+Vue.config.productionTip = true
 
 import './assets/font-awesome-4.7.0/css/font-awesome.min.css'
 /* eslint-disable no-new */

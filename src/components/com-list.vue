@@ -25,13 +25,13 @@
 	import scr from "better-scroll"
 	import Tab from "vux/src/components/tab/tab"
 	import TabItem from "vux/src/components/tab/tab-item"
-	import comment from "./base/comment.vue"
+	import Comment from "./comment"
 	import LoadMore from "vux/src/components/load-more"
 	export default {
 		components: {
 			Tab,
 			TabItem,
-			comment,
+			Comment,
 			LoadMore
 		},
 		data() {

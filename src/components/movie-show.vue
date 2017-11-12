@@ -1,179 +1,122 @@
 <template>
-	<div ref="movieShow">
-		<div>
-			<loading v-model:show="loading.load" text="加载"></loading>
-			<div v-if="loading.con" class="load">
-				<div class="movieHead">
-					<div class="movieBg">
-						<div class="movieImg" :style="{backgroundImage: 'url(' + setUrl(movieMess.images.large) + ')'}">
-						</div>
-						<div class="mask"></div>
-						<div class="infoBg"></div>
+	<div class="appBg">
+		<div v-if="!movieData.loading" class="load">
+			<div class="movieHead">
+				<div class="movieBg">
+					<div class="movieImg" :style="{backgroundImage: 'url(' + setUrl(movieData.movieMess.images.large) + ')'}">
 					</div>
-					<div class="bg"></div>
-					<div class="movieBox">
-						<div class="moviePic">
-							<img class="img" :src="setUrl(movieMess.images.large)" :title="movieMess.title">
-						</div>
-						<div class="movieTex">
-							<header class="head">
-								<p class="title">{{movieMess.title}}</p>
-								<p class="aka">{{movieMess.original_title == movieMess.title? movieMess.aka[0] : movieMess.original_title }}</p>
-							</header>
-							<div class="average" v-if="average != 0" v-text="average"></div>
-							<ul class="list">
-								<li v-text="movieMess.durations[0]"></li>
-								<li v-text="countries"></li>
-								<li v-text="genres"></li>
-								<li v-text="setPubdate(movieMess.mainland_pubdate)"></li>
-							</ul>
-						</div>
+					<div class="mask"></div>
+					<div class="infoBg"></div>
+				</div>
+				<div class="bg"></div>
+				<div class="movieBox">
+					<div class="moviePic">
+						<img class="img" :src="setUrl(movieData.movieMess.images.large)" :title="movieData.movieMess.title">
+					</div>
+					<div class="movieTex">
+						<header class="head">
+							<p class="title">{{movieData.movieMess.title}}</p>
+							<p class="aka">{{movieData.movieMess.original_title == movieData.movieMess.title? movieData.movieMess.aka[0] : movieData.movieMess.original_title }}</p>
+						</header>
+						<div class="average" v-if="average != 0" v-text="average"></div>
+						<ul class="list">
+							<li v-text="movieData.movieMess.durations[0]"></li>
+							<li v-text="countries"></li>
+							<li v-text="genres"></li>
+							<li v-text="setPubdate(movieData.movieMess.mainland_pubdate)"></li>
+						</ul>
 					</div>
 				</div>
-				<div class="plot">
-					<p ref="plotMess" class="plotMess plotMessO">{{movieMess.summary}}</p>
-					<a ref="morePlot" class="morePlot fa fa-angle-down fa-2x" @click="plotShow"></a>
-				</div>
-				<div class="imgs">
-					<h2 class="moreImgs">
-						<span class="imgTitle">演职人员</span>
-					</h2>
-					<div ref="imgWrap" class="imgWrap">
-						<div class="imgsShow clearfix" :style="{width:imgWidth}">
-							<div class="imgList" v-for="item in movieMess.directors">
-								<div>
-									<img v-if="!item.avatars" src="../assets/img/default-medium.png" :title="item.name">
-									<img v-if="item.avatars" :src="isImg(item)" :title="item.name">
-								</div>
-								<div>
-									<p v-text="item.name"></p>
-									<p class="work">导演</p>
-								</div>
-							</div>
-							<div class="imgList" v-for="item in movieMess.casts">
-								<div>
-									<img v-if="!item.avatars" src="../assets/img/default-medium.png" :title="item.name">
-									<img v-if="item.avatars" :src="isImg(item)" :title="item.name">
-								</div>
-								<div>
-									<p class="name" v-text="item.name"></p>
-									<p class="work">演员</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="imgs">
-					<h2 class="moreImgs">
-						<span class="imgTitle">剧照</span>
-					</h2>
-					<div ref="postWrap" class="imgWrap">
-						<div class="imgsShow clearfix" :style="{width:imgWidthO}">
-							<div class="imgList" v-for="item in movieMess.photos">
-								<img :src="setUrl(item.cover)">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="comment">
-					<h2>热评</h2>
-					<div>
-						<comment v-for="item in movieMess.popular_comments" :comDate="item" :key="item.id"></comment>
-					</div>
-					<div class="moreComment" @click="getComList(movieMess.id)">
-						更多评论
-					</div>
-				</div>
-				<div class="lastBox"></div>
 			</div>
+			<div class="plot">
+				<p ref="plotMess" class="plotMess plotMessO">{{movieMess.summary}}</p>
+				<a ref="morePlot" class="morePlot fa fa-angle-down fa-2x" @click="plotShow"></a>
+			</div>
+			<div class="imgs">
+				<h2 class="moreImgs">
+					<span class="imgTitle">演职人员</span>
+				</h2>
+				<div ref="imgWrap" class="imgWrap">
+					<div class="imgsShow clearfix" :style="{width:imgWidth}">
+						<div class="imgList" v-for="item in movieMess.directors">
+							<div>
+								<img v-if="!item.avatars" src="../../assets/img/default-medium.png" :title="item.name">
+								<img v-if="item.avatars" :src="isImg(item)" :title="item.name">
+							</div>
+							<div>
+								<p v-text="item.name"></p>
+								<p class="work">导演</p>
+							</div>
+						</div>
+						<div class="imgList" v-for="item in movieMess.casts">
+							<div>
+								<img v-if="!item.avatars" src="../../assets/img/default-medium.png" :title="item.name">
+								<img v-if="item.avatars" :src="isImg(item)" :title="item.name">
+							</div>
+							<div>
+								<p class="name" v-text="item.name"></p>
+								<p class="work">演员</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="imgs">
+				<h2 class="moreImgs">
+					<span class="imgTitle">剧照</span>
+				</h2>
+				<div ref="postWrap" class="imgWrap">
+					<div class="imgsShow clearfix" :style="{width:imgWidthO}">
+						<div class="imgList" v-for="item in movieMess.photos">
+							<img :src="setUrl(item.cover)">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="comment">
+				<h2>热评</h2>
+				<div>
+					<comment v-for="item in movieMess.popular_comments" :comDate="item" :key="item.id"></comment>
+				</div>
+				<div class="moreComment" @click="getComList(movieMess.id)">
+					更多评论
+				</div>
+			</div>
+			<div class="lastBox"></div>
 		</div>
 	</div>
 </template>
 
-<script>
-	import comment from "./base/comment.vue"
-	import loading from "vux/src/components/loading";
-	import scr from "better-scroll";
+<script type="text/ecmascript-6">
+	import Comment from '../../components/comment'
+	import Loading from 'vux/src/components/loading'
+	import Scroll from '../../components/scroll'
+	import { mapMutations } from 'vuex'
 	export default {
-		name: "movieShow",
 		components: {
-			loading,
-			comment
-		},
-		data() {
-			return {
-				movieMess: {
-					images: {
-						large: ''
-					},
-					durations: [],
-					aka: [],
-					countries: [],
-					genres: [],
-					rating: {
-						average: []
-					},
-					directors: [],
-					casts: [],
-					photos: []
-				},
-				loading: {
-					load: true,
-					con: false
-				},
-			};
+			Comment,
+			Loading,
+			Scroll
 		},
 		created() {
-			fetch(`/api/movie/subject/${localStorage.id}?apikey=0b2bdeda43b5688921839c8ecb20399b`).then(res => {
-				return res.json();
-			}).then((data) => {
-				this.movieMess = data;
-				this.loading.load = false;
-				this.loading.con = true;
-				this.$nextTick(() => {
-					if (!this.scroll) {
-						this.scroll = new scr(this.$refs.movieShow, {
-							click: true
-						});
-					} else {
-						this.scroll.refresh();
-					}
-				});
-				this.$nextTick(() => {
-					this.scroll = new scr(this.$refs.imgWrap, {
-						scrollX: true,
-						eventPassthrough: "vertical"
-					});
-				});
-				this.$nextTick(() => {
-					this.scroll = new scr(this.$refs.postWrap, {
-						scrollX: true,
-						eventPassthrough: "vertical"
-					});
-				});
-			});
-			this.$store.commit("setTitle", localStorage.title);
-			this.$store.commit("setHead", true);
-			this.$store.commit("setHeader", true);
-			this.$store.commit("setBottom", false);
-			this.$store.commit("setBack", true);
-			this.$store.commit("setHead", true);
-			this.$store.commit("setSearch", false);
+			this.$store.dispatch("getMovieView",this.$route.params.movieId);
+			this.showHeader(true);
+			this.showBack(false);
+			this.title('热映');
+			this.headBack(false);
+			this.showSearch(true);
+			this.showBottom(true);
+			this.selected('/hot');
 		},
 		computed: {
-			//计算实例化scroll时的宽度
-			imgWidth() {
-				let imgWidth = 100 * (this.movieMess.directors.length + this.movieMess.casts.length) + 'px';
-				return imgWidth;
-			},
-			imgWidthO() {
-				let imgWidth = 100 * this.movieMess.photos.length + 'px';
-				return imgWidth;
+			movieData() {
+				console.log(this.$store.state.movieData)
+				return this.$store.state.movieData;
 			},
 			//处理地区
 			countries() {
 				let countrie = '';
-				this.movieMess.countries.forEach((item, index) => {
+				this.movieData.movieMess.countries.forEach((item, index) => {
 					if (index > 0) {
 						countrie += '/';
 					}
@@ -184,7 +127,7 @@
 			//处理演员
 			genres() {
 				let genres = '';
-				this.movieMess.genres.forEach((item, index) => {
+				this.movieData.movieMess.genres.forEach((item, index) => {
 					if (index > 0) {
 						genres += '/';
 					}
@@ -194,11 +137,20 @@
 			},
 			//处理评分补零
 			average() {
-				let average = this.movieMess.rating.average;
+				let average = this.movieData.movieMess.rating.average;
 				if (average.length == 1) {
 					average += '.0';
 				}
 				return average;
+			},
+			//计算实例化scroll时的宽度
+			imgWidth() {
+				let imgWidth = 100 * (this.movieData.movieMess.directors.length + this.movieData.movieMess.casts.length) + 'px';
+				return imgWidth;
+			},
+			imgWidthO() {
+				let imgWidth = 100 * this.movieData.movieMess.photos.length + 'px';
+				return imgWidth;
 			},
 		},
 		methods: {
@@ -243,12 +195,20 @@
 						movieId: movieId
 					}
 				});
-			}
+			},
+			...mapMutations({
+				showHeader: 'SHOW_HEADER',
+				showBack: 'SHOW_BACK',
+				title: 'TITLE',
+				headBack: 'HEAD_BACK',
+				showSearch: 'SHOW_SEARCH',
+				showBottom: 'SHOW_BOTTOM',
+				selected: 'SELECTED'
+			})
 		}
-	};
+	}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 	.appBg {
 		.load {
@@ -291,7 +251,7 @@
 			.infoBg {
 				position: absolute;
 				top: 0;
-				background: url(../assets/img/info_bg.png) no-repeat center bottom;
+				background: url(../../assets/img/info_bg.png) no-repeat center bottom;
 				background-size: auto 30px;
 			}
 		}

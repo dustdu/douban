@@ -44,7 +44,7 @@ export default {
     return {};
   },
   beforeCreate() {
-    this.$store.dispatch("getTopMovies");
+    this.$store.dispatch("getTop250Movies");
     this.$store.commit("setSelect", "/top");
     this.$store.commit("setTitle", "排行榜");
     this.$store.commit("setBottom", true);
@@ -62,15 +62,9 @@ export default {
       });
     }
   },
-  destroyed(){
-    this.$store.commit("topLoding");
-  },
   computed: {
     topDate() {
-      return this.$store.state.topDate;
-    },
-    boxHeight() {
-      return this.$store.getters.topHeight;
+      return this.$store.state.top250Date;
     }
   },
   methods: {

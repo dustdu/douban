@@ -1,41 +1,48 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import top from '@/components/top'
-import next from '@/components/next'
-import hot from '@/components/hot'
+Vue.use(Router)
+
+import MovieHot from '@/pages/movie-hot'
+import MovieComing from '@/pages/movie-coming'
+import MovieTop250 from '@/pages/movie-top250'
+import MovieShow from '@/pages/movie-show'
 import search from '@/components/search'
 import comList from '@/components/com-list'
-import movieShow from '@/components/movie-show'
 import reviews from '@/components/reviews'
-Vue.use(Router)
+
 
 export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/hot'
+    },
+    {
+      path: '/hot',
       name: 'hot',
-      component: hot
+      component: MovieHot
     },
     {
-      path: '/next',
-      name: 'next',
-      component: next
+      path: '/coming',
+      name: 'coming',
+      component: MovieComing
     },
     {
-      path: '/top',
-      name: 'top',
-      component: top
+      path: '/top250',
+      name: 'top250',
+      component: MovieTop250
+    },
+    {
+      path: '/movie/:movieId',
+      name: 'MovieShow',
+      component: MovieShow
     },
     {
       path: '/search',
       name: 'search',
       component: search
     },
-    {
-      path: '/movie/:movieId',
-      name: 'movieShow',
-      component: movieShow
-    },
+    
     {
       path: '/movie/:movieId/comment',
       name: 'comList',
