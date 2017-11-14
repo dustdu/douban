@@ -1,34 +1,40 @@
 <template>
   <div id="app">
     <view-box 
-      body-padding-bottom = "53px" 
-      body-padding-top = "46px">
+      :body-padding-top = "bodyTop"
+      :body-padding-bottom = "bodyBottom" 
+    >
       <x-header 
         slot="header" 
         v-if="showHeader" 
         style="width: 100%;position: absolute;left: 0;top: 0;z-index: 100;" 
         :left-options="{showBack: showBack}" 
         :title="title" 
-        :class="{headBack: headBack}">
+        :class="{headBack: headBack}"
+      >
         <div 
           v-if="showSearch" 
           slot="right" 
-          @click="search">搜索</div>
+          @click="search"
+        >搜索</div>
       </x-header>
-      <keep-alive>
+      <keep-alive exclude="movieShow">
         <router-view></router-view>
       </keep-alive>
       <tabbar 
         slot="bottom" 
-        v-if="showBottom">
+        v-if="showBottom"
+      >
         <tabbar-item 
           v-for="tabbar in tabbars" 
           :key="tabbar.name" 
           :link="tabbar.link" 
-          :selected="tabbar.link == selected">
+          :selected="tabbar.link == selected"
+        >
           <i 
             slot="icon" 
-            :class="tabbar.icon"></i>
+            :class="tabbar.icon"
+          ></i>
           <span slot="label">{{tabbar.name}}</span>
         </tabbar-item>
       </tabbar>
@@ -78,7 +84,9 @@
         'headBack',
         'showSearch',
         'showBottom',
-        'selected'
+        'selected',
+        'bodyBottom',
+        'bodyTop'
       ])
     },
     methods: {
@@ -99,6 +107,14 @@
     width: 100%;
     overflow-x: hidden;
   }
+  img {
+    vertical-align: top;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
   .clearFix::after {
     content: "";
     display: block;
@@ -114,7 +130,8 @@
       font-size: 16px;
     }
     .headBack {
-      background: rgba(000, 000, 000, .3);
+      background: rgba(000, 000, 000, .5);
     }
+
   }
 </style>

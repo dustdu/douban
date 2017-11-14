@@ -1,33 +1,44 @@
 <template>
 	<div 
 		class="row clearFix" 
-		@click="link(movieData.id,movieData.title)">
+		@click="link(movieData.id,movieData.title)"
+	>
 		<div class="img">
 			<img 
 				:src="setUrl(movieData.images.medium)" 
-				:alt="movieData.title">
+				:alt="movieData.title"
+			>
 		</div>
 		<ul class="mess">
 			<li class="messTitle">{{movieData.title}}</li>
 			<li class="actColor">导演：
 				<span 
 					v-for="(item,index) in movieData.directors" 
-					:key="item.id">
-					<span v-if="index>0">/</span>{{item.name}}</span>
+					:key="item.id"
+				>
+					<span v-if="index>0">/</span>{{item.name}}
+				</span>
 			</li>
 			<li class="actColor">主演：
 				<span 
 					v-for="(item,index) in movieData.casts" 
-					:key="item.id">
+					:key="item.id"
+				>
 						<span v-if="index>0">/</span>{{item.name}}
 				</span>
 			</li>
 			<li class="rat clearfix">
 				<span>评分：</span>
-				<span v-for="item in Math.ceil(movieData.rating.average/2)" class="fa fa-star" :key="item.id"></span>
-				<span v-for="item in 5-Math.ceil(movieData.rating.average/2)" class="fa fa-star-o" :key="item.id"></span>
+				<span 
+					v-for="item in Math.ceil(movieData.rating.average/2)" class="fa fa-star" 
+					:key="item.id"
+				></span>
+				<span 
+					v-for="item in 5-Math.ceil(movieData.rating.average/2)" class="fa fa-star-o" 
+					:key="item.id"
+				></span>
 			</li>
-			<li>{{movieData.collect_count}}人看过</li>
+			<li class="collect">{{movieData.collect_count}}人看过</li>
 		</ul>
 	</div>
 </template>
@@ -61,14 +72,14 @@
 	.row {
 		width: 100%;
 		margin: 0 0 8px;
-		padding: 10px 0;
+		padding: 15px 0;
 		box-shadow: 0 0 4px #aaaaaa;
 		background: #fff;
 		.img {
 			float: left;
-			padding: 0 10px;
-			height: 120px;
-			width: 110px;
+			padding: 0 18px;
+			height: 140px;
+			width: 130px;
 			img {
 				height: 100%;
 				width: 100%;
@@ -83,8 +94,8 @@
 			float: left;
 			width: 100%;
 			height: 100%;
-			padding-left: 110px;
-			margin-left: -110px;
+			padding-left: 140px;
+			margin-left: -140px;
 			.rat {
 				* {
 					float: left;
@@ -93,13 +104,18 @@
 					margin-left: 8px;
 				}
 			}
-			font-size: 12px;
-			line-height: 24px;
+			font-size: 14px;
+			line-height: 26px;
 			.messTitle {
-				font-size: 16px;
+				font-size: 18px;
+				line-height: 32px;
 			}
 			.actColor {
-				color: #777;
+				color: #636363;
+			}
+			.collect {
+				font-size: 15px;
+				line-height: 28px;
 			}
 		}
 		.fa {

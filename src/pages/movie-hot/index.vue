@@ -2,16 +2,19 @@
   <div style="height: 100%;">
     <loading 
       v-model="hotData.loading" 
-      text="加载中..."></loading>
+      text="加载中..."
+    ></loading>
     <scroll 
       v-show="!hotData.loading" 
       :data="hotData.movieList.subjects" 
-      class="wrap">
+      class="wrap"
+    >
       <div>
         <movie-li 
           v-for="item in hotData.movieList.subjects" 
           :key="item.id" 
-          :movieData="item"></movie-li>
+          :movieData="item"
+        ></movie-li>
       </div>
     </scroll>
   </div>
@@ -30,6 +33,8 @@
     },
     created() {
       this.$store.dispatch("getHotMovies");
+    },
+    activated(){
       this.showHeader(true);
       this.showBack(false);
       this.title('热映');
@@ -37,6 +42,8 @@
       this.showSearch(true);
       this.showBottom(true);
       this.selected('/hot');
+      this.bodyTop('46px');
+      this.bodyBottom('53px');
     },
     computed: {
       hotData() {
@@ -51,7 +58,10 @@
         headBack: 'HEAD_BACK',
         showSearch: 'SHOW_SEARCH',
         showBottom: 'SHOW_BOTTOM',
-        selected: 'SELECTED'
+        selected: 'SELECTED',
+        bodyTop: 'BODY_TOP',
+        bodyBottom: 'BODY_BOTTOM'
+        
       })
     }
   }

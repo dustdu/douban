@@ -7,6 +7,8 @@ const state = {
   showSearch: true,
   showBottom: true,
   selected: '/hot',
+  bodyTop: '46px',
+  bodyBottom: '53px',
   //
   //热映
   hotData: {
@@ -28,17 +30,8 @@ const state = {
     movieMess: {
       images: {
         large: ''
-      },
-      durations: [],
-      aka: [],
-      countries: [],
-      genres: [],
-      rating: {
-        average: []
-      },
-      directors: [],
-      casts: [],
-      photos: []
+      }
+
     },
     loading: true
   }

@@ -5,28 +5,13 @@ Vue.use(Vuex)
 import state from './state'
 import mutations from './mutations'
 import * as actions from './actions'
+import * as getters from './getters'
 
 export default new Vuex.Store({
   state,
   // state: {
   //   
-  //   //使用数据时出现所需数据未定义
-  //   movieMess: {
-  //     images: {
-  //       large: ''
-  //     },
-  //     durations: [],
-  //     aka: [],
-  //     countries: [],
-  //     genres: [],
-  //     rating: {
-  //       average: []
-  //     },
-  //     directors: [],
-  //     casts: [],
-  //     photos: []
-
-  //   },
+  
   //   searchVal: {
   //     subjects: []
   //   },
@@ -50,10 +35,7 @@ export default new Vuex.Store({
   //     con: false
   //   },
   // },
-  getters: {
-
-    
-  },
+  getters,
   mutations,
   // mutations: {
   //   setMovieId(state, id) {

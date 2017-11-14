@@ -3,7 +3,6 @@ import * as types from './mutation-types'
 const mutations = {
     //导航栏和底栏
     [types.SHOW_HEADER](state,show){
-        console.log(show);
         state.showHeader = show;
     },
     [types.SHOW_BACK](state,show){
@@ -23,6 +22,12 @@ const mutations = {
     },
     [types.SELECTED](state,link){
         state.selected = link;
+    },
+    [types.BODY_TOP](state,top){
+        state.bodyTop = top;
+    },
+    [types.BODY_BOTTOM](state,bottom){
+        state.bodyBottom = bottom;
     },
     //
     //热映
@@ -44,6 +49,10 @@ const mutations = {
     [types.MOVIE_VIEW](state,data){
         state.movieData.movieMess = data;
         state.movieData.loading = false;
+    },
+    //电影loading
+    [types.MOVIE_LOADING](state){
+        state.movieData.loading = true;
     }
 
 }

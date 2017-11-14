@@ -1,24 +1,44 @@
 <template>
-	<div class="commentWrap" @click="toRev">
-		<h2 v-if="comDate.summary" v-text="comDate.title"></h2>
+	<div 
+		class="commentWrap" 
+		@click="toRev"
+	>
+		<h2 
+			v-if="comDate.summary" 
+			v-text="comDate.title"
+		></h2>
 		<div class="comCon">
 			<div>
 				<img :src="comDate.author.avatar">
 			</div>
 			<div>
-				<div class="author clearfix">
+				<div class="author clearFix">
 					<h3 v-text="comDate.author.name"></h3>
-					<div class="rating clearfix">
-						<span v-for="itemO in comDate.rating.value" class="fa fa-star"></span>
-						<span v-for="itemO in 5-comDate.rating.value" class="fa fa-star-o"></span>
+					<div class="rating clearFix">
+						<span 
+							v-for="(item,index) in comDate.rating.value" 
+							:key="index"
+							class="fa fa-star"
+						></span>
+						<span 
+							v-for="(item,index) in 5-comDate.rating.value" 
+							:key="index"
+							class="fa fa-star-o"
+						></span>
 					</div>
 					<div class="useful">
 						<span class="fa fa-thumbs-up"></span>
 						<span v-text="comDate.useful_count"></span>
 					</div>
 				</div>
-				<p class="content" v-text="comDate.summary?comDate.summary:comDate.content"></p>
-				<p class="created" v-text="comDate.created_at"></p>
+				<p 
+					class="content" 
+					v-text="comDate.summary?comDate.summary:comDate.content"
+				></p>
+				<p 
+					class="created" 
+					v-text="comDate.created_at"
+				></p>
 			</div>
 		</div>
 	</div>
