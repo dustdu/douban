@@ -78,16 +78,18 @@
 						@click="plotShow"
 					></div>
 				</div>
-				<!-- 'getMatchedCSSRules()' is deprecated. For more help, -->
+				<!-- 在加载详情页后，竖向scroll实例化高度问题，为图片加高度 -->
 				<img-scroll-x
 					:wrapWidth="actorWidth"
 					title="演职人员"
 					:imgData="actorData"
+					imgHeight="182px"
 				></img-scroll-x>
 				<img-scroll-x 
 					:wrapWidth="postWidth"
 					title="剧照"
 					:imgData="postData"
+					imgHeight="90px"
 				></img-scroll-x>
 				<div class="comment">
 					<h2>热评</h2>

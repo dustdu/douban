@@ -1,7 +1,7 @@
 <template>
 	<div 
 		class="row clearFix" 
-		@click="link(movieData.id,movieData.title)"
+		@click="link(movieData.id)"
 	>
 		<div class="img">
 			<img 
@@ -53,7 +53,7 @@
 			}
 		},
 		methods: {
-			link(id, title) {
+			link(id) {
 				this.$router.push({
 					name: "MovieShow",
 					params: {

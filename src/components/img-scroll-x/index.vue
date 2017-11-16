@@ -18,9 +18,10 @@
 				class="imgsShow clearFix" 
 				:style="{width:wrapWidth}"
 			>
-			<!-- :key="item.id"  -->
+			<!-- 设置高度，实例化scroll时不会出现高度问题  -->
 				<div 
-					class="imgList" 
+					class="imgList"
+					:style="{height:imgHeight}"
 					v-for="item in imgData" 
 					:key="item.id"
 				>
@@ -74,6 +75,10 @@
 			imgData: {
 				type: Array,
 				default: null
+			},
+			imgHeight: {
+				type: String,
+				default: ''
 			}
 		},
 		methods: {
@@ -89,7 +94,7 @@
 
 <style scoped lang="scss">
 	.imgs {
-		padding-bottom: 15px;
+		padding-bottom: 13px;
 		.vux-header {
 			background: white;
 		}
@@ -111,6 +116,9 @@
 					text-align: center;
 					margin: 0 5px;
 					width: 90px;
+					&:last-of-type{
+						height: 90px;
+					}
 					.imgType {
 						margin-top: 10px;
 						.name {
