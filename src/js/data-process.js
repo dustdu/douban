@@ -17,7 +17,7 @@ export function arrConnect(arr) {
   return str;
 }
 //数字补零
-export function zeroFill(num){
+export function zeroFill(num) {
   num = num.toString();
   if (num.length == 1) {
     num += '.0';
@@ -25,7 +25,16 @@ export function zeroFill(num){
   return num;
 }
 //计算宽度
-export function boxWidth(width,arr){
-  let boxWidth = width*arr.length;
+export function boxWidth(width, arr) {
+  let boxWidth = width * arr.length;
   return boxWidth;
+}
+//处理请求数据的参数
+export function params(start, startCount,count) {
+  let newStart = 0;
+  if (start >= startCount) {
+    return newStart = start+ count;
+  } else {
+    return newStart = startCount;
+  }
 }

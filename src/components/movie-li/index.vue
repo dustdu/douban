@@ -55,7 +55,7 @@
 		methods: {
 			link(id) {
 				this.$router.push({
-					name: "MovieShow",
+					name: "movieShow",
 					params: {
 						movieId: id
 					}

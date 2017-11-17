@@ -4,40 +4,40 @@
 		@click="toRev"
 	>
 		<h2 
-			v-if="comDate.summary" 
-			v-text="comDate.title"
+			v-if="comData.summary" 
+			v-text="comData.title"
 		></h2>
 		<div class="comCon">
 			<div>
-				<img :src="comDate.author.avatar">
+				<img :src="comData.author.avatar">
 			</div>
 			<div>
 				<div class="author clearFix">
-					<h3 v-text="comDate.author.name"></h3>
+					<h3 v-text="comData.author.name"></h3>
 					<div class="rating clearFix">
 						<span 
-							v-for="(item,index) in comDate.rating.value" 
+							v-for="(item,index) in comData.rating.value" 
 							:key="index"
 							class="fa fa-star"
 						></span>
 						<span 
-							v-for="(item,index) in 5-comDate.rating.value" 
+							v-for="(item,index) in 5-comData.rating.value" 
 							:key="index"
 							class="fa fa-star-o"
 						></span>
 					</div>
 					<div class="useful">
 						<span class="fa fa-thumbs-up"></span>
-						<span v-text="comDate.useful_count"></span>
+						<span v-text="comData.useful_count"></span>
 					</div>
 				</div>
 				<p 
 					class="content" 
-					v-text="comDate.summary?comDate.summary:comDate.content"
+					v-text="comData.summary?comData.summary:comData.content"
 				></p>
 				<p 
 					class="created" 
-					v-text="comDate.created_at"
+					v-text="comData.created_at"
 				></p>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 <script>
 	export default {
 		props: {
-			comDate: {
+			comData: {
 				type: Object,
 				default: {}
 			}

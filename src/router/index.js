@@ -6,8 +6,8 @@ import MovieHot from '@/pages/movie-hot'
 import MovieComing from '@/pages/movie-coming'
 import MovieTop250 from '@/pages/movie-top250'
 import MovieShow from '@/pages/movie-show'
+import MovieComments from '@/pages/movie-comments'
 import search from '@/components/search'
-import comList from '@/components/com-list'
 import reviews from '@/components/reviews'
 
 
@@ -34,19 +34,18 @@ export default new Router({
     },
     {
       path: '/movie/:movieId',
-      name: 'MovieShow',
+      name: 'movieShow',
       component: MovieShow
+    },
+    {
+      path: '/movie/:movieId/comments',
+      name: 'movieComments',
+      component: MovieComments
     },
     {
       path: '/search',
       name: 'search',
       component: search
-    },
-    
-    {
-      path: '/movie/:movieId/comment',
-      name: 'comList',
-      component: comList
     },
     {
       path: '/movie/:movieId/reviews/:revId',

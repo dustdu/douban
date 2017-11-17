@@ -53,6 +53,32 @@ const mutations = {
     //电影loading
     [types.MOVIE_LOADING](state){
         state.movieData.loading = true;
+    },
+    //短评数据
+    [types.MOVIE_COMMENTS](state,data){
+        state.commentsList = state.commentsList.concat(data.comments);
+        state.commentsMess = data.subject;
+        if (data.comments.length < data.count) {
+            state.commentsMore = false;
+        }
+        state.commentsLoading = true;
+    },
+    //短评数据加载loading
+    [types.COMMENTS_LOADING](state){
+        state.commentsLoading = false;
+    },
+    //长评数据
+    [types.MOVIE_REVIEWS](state,data){
+        state.reviewsList = state.reviewsList.concat(data.reviews);
+        state.reviewsMess = data.subject;
+        if (data.reviews.length < data.count) {
+            state.reviewsMore = false;
+        }
+        state.reviewsLoading = true;
+    },
+    //长评数据加载loading
+    [types.REVIEWS_LOADING](state){
+        state.reviewsLoading = false;
     }
 
 }

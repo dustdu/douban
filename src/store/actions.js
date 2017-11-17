@@ -20,9 +20,26 @@ export const getTop250Movies = ({ commit }) => {
     });
 }
 //电影详细数据
-export const getMovieView = ({ commit },id) => {
-    getData.getMovieView(id).then((data) => {
+export const getMovieView = ({ commit },movieId) => {
+    getData.getMovieView(movieId).then((data) => {
         commit(types.MOVIE_VIEW,data);
+    });
+}
+//短评数据
+export const getMovieComments = ({ commit },params) => {
+    getData.getMovieComments(params).then((data) => {
+        setTimeout(() => {
+            commit(types.MOVIE_COMMENTS,data);
+        }, 500);
+    });
+}
+//长评数据
+export const getMovieReviews = ({ commit },params) => {
+    getData.getMovieReviews(params).then((data) => {
+        setTimeout(() => {
+            console.log(55)
+            commit(types.MOVIE_REVIEWS,data);
+        }, 500);
     });
 }
 

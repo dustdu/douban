@@ -96,7 +96,7 @@
 					<div>
 						<comment 
 							v-for="item in movieData.movieMess.popular_comments" 
-							:comDate="item" 
+							:comData="item" 
 							:key="item.id"
 						></comment>
 					</div>
@@ -183,7 +183,7 @@
 			//评论列表
 			getComList(movieId) {
 				this.$router.push({
-					name: "comList",
+					name: "movieComments",
 					params: {
 						movieId: movieId
 					}

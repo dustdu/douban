@@ -26,3 +26,11 @@ export const TOP250_MOVIE = 'TOP250_MOVIE'
 export const MOVIE_VIEW = 'MOVIE_VIEW'
 //电影详细页面loading
 export const MOVIE_LOADING = 'MOVIE_LOADING'
+//电影短评
+export const MOVIE_COMMENTS = 'MOVIE_COMMENTS'
+//电影短评loading
+export const COMMENTS_LOADING = 'COMMENTS_LOADING'
+//电影长评
+export const MOVIE_REVIEWS = 'MOVIE_REVIEWS'
+//电影长评loading
+export const REVIEWS_LOADING = 'REVIEWS_LOADING'

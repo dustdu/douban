@@ -19,8 +19,20 @@ export function getTop250Movies(start, count) {
   });
 }
 //电影详细数据api
-export function getMovieView(id) {
-  return fetch(`/api/movie/subject/${id}?apikey=${apiKey}`).then(res => {
+export function getMovieView(movieId) {
+  return fetch(`/api/movie/subject/${movieId}?apikey=${apiKey}`).then(res => {
+    return res.json();
+  });
+}
+//短评数据api
+export function getMovieComments(params) {
+  return fetch(`/api/movie/subject/${params.movieId}/comments?apikey=${apiKey}&start=${params.start}&count=${params.count}`).then(res => {
+    return res.json();
+  });
+}
+//长评数据api
+export function getMovieReviews(params) {
+  return fetch(`/api/movie/subject/${params.movieId}/reviews?apikey=${apiKey}&start=${params.start}&count=${params.count}`).then(res => {
     return res.json();
   });
 }

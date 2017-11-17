@@ -31,10 +31,19 @@ const state = {
       images: {
         large: ''
       }
-
     },
     loading: true
-  }
+  },
+  //短评
+  commentsMess: {},
+  commentsList: [],
+  commentsLoading: true,
+  commentsMore: true,
+  //长评
+  reviewsMess: {},
+  reviewsList: [],
+  reviewsLoading: true,
+  reviewsMore: true
 };
 
 export default state;
