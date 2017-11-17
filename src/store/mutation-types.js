@@ -34,3 +34,9 @@ export const COMMENTS_LOADING = 'COMMENTS_LOADING'
 export const MOVIE_REVIEWS = 'MOVIE_REVIEWS'
 //电影长评loading
 export const REVIEWS_LOADING = 'REVIEWS_LOADING'
+//清除评论信息
+export const COMMENTS_CLEAN = 'COMMENTS_CLEAN'
+//详细长评
+export const REVIEWS_FULL = 'REVIEWS_FULL'
+//详细长评loading
+export const REVIEWS_FULL_LOADING = 'REVIEWS_FULL_LOADING'

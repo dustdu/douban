@@ -30,17 +30,21 @@ export const getMovieComments = ({ commit },params) => {
     getData.getMovieComments(params).then((data) => {
         setTimeout(() => {
             commit(types.MOVIE_COMMENTS,data);
-        }, 500);
+        }, 100);
     });
 }
 //长评数据
 export const getMovieReviews = ({ commit },params) => {
     getData.getMovieReviews(params).then((data) => {
         setTimeout(() => {
-            console.log(55)
             commit(types.MOVIE_REVIEWS,data);
-        }, 500);
+        }, 100);
     });
 }
-
+//长评详细数据
+export const getReviewsFull = ({ commit },reviewsId) => {
+    getData.getReviewsFull(reviewsId).then((data) =>{
+        commit(types.REVIEWS_FULL,data);
+    });
+}
 

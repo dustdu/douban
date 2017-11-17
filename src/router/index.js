@@ -7,8 +7,9 @@ import MovieComing from '@/pages/movie-coming'
 import MovieTop250 from '@/pages/movie-top250'
 import MovieShow from '@/pages/movie-show'
 import MovieComments from '@/pages/movie-comments'
+import Reviews from '@/pages/reviews'
 import search from '@/components/search'
-import reviews from '@/components/reviews'
+
 
 
 export default new Router({
@@ -43,14 +44,15 @@ export default new Router({
       component: MovieComments
     },
     {
+      path: '/movie/:movieId/reviews/:reviewsId',
+      name: 'reviews',
+      component: Reviews
+    },
+    {
       path: '/search',
       name: 'search',
       component: search
     },
-    {
-      path: '/movie/:movieId/reviews/:revId',
-      name: 'reviews',
-      component: reviews
-    }
+    
   ]
 })

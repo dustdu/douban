@@ -66,7 +66,6 @@
 				</div>
 				
 				<div class="plot">
-					<!-- 'getMatchedCSSRules()' is deprecated. For more help, check https://code.google.com/p/chromium/issues/detail?id=437569#c2 -->
 					<!-- common.js:67 Uncaught (in promise) {message: "The message port closed before a response was received."} -->
 					<!-- 文字的容器是<p>报错 -->
 					<div 

@@ -40,7 +40,7 @@
             v-for="item in reviewsList"
             :key="item.id"
             :comData="item"
-            @toRev="toRev"
+            @toReviews="toReviews(reviewsMess.id,item.id)"
           ></comment>
           <load-more v-show="show"></load-more>
         </div>
@@ -96,6 +96,9 @@
     beforeUpdate() {
       this.title(this.commentsMess.title);
     },
+    beforeDestroy () {
+      this.commentsClean();
+    },
     computed: {
       ...mapState([
         'commentsMess',
@@ -138,7 +141,6 @@
           console.log('正在加载');
           return;
         }
-        console.log(222)
         this.addReviews();
         this.reviewsStart = params(this.reviewsStart,20,this.addCount);
         this.getMovieReviews( {
@@ -147,12 +149,12 @@
           count: this.addCount
         });
       },
-      toRev(movieId, revId, revName) {
+      toReviews(movieId, reviewsId) {
         this.$router.push({
           name: "reviews",
           params: {
             movieId: movieId,
-            revId: revId
+            reviewsId: reviewsId
           }
         });
       },
@@ -166,7 +168,8 @@
         bodyTop: 'BODY_TOP',
         bodyBottom: 'BODY_BOTTOM',
         addComments: 'COMMENTS_LOADING',
-        addReviews: 'REVIEWS_LOADING'
+        addReviews: 'REVIEWS_LOADING',
+        commentsClean: 'COMMENTS_CLEAN'
       }),
       ...mapActions([
         'getMovieComments',

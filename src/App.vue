@@ -18,7 +18,7 @@
           @click="search"
         >搜索</div>
       </x-header>
-      <keep-alive exclude="movieShow,movieComments">
+      <keep-alive exclude="movieShow,movieComments,reviewsFull">
         <router-view></router-view>
       </keep-alive>
       <tabbar 

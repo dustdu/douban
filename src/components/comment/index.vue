@@ -1,7 +1,7 @@
 <template>
 	<div 
 		class="commentWrap" 
-		@click="toRev"
+		@click="toReviews"
 	>
 		<h2 
 			v-if="comData.summary" 
@@ -53,8 +53,8 @@
 			}
 		},
 		methods: {
-			toRev() {
-				this.$emit('toRev');
+			toReviews() {
+				this.$emit('toReviews');
 			}
 		}
 	};

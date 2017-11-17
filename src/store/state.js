@@ -43,7 +43,10 @@ const state = {
   reviewsMess: {},
   reviewsList: [],
   reviewsLoading: true,
-  reviewsMore: true
+  reviewsMore: true,
+  //完整长评
+  reviewsFull: {},
+  reviewsFullLoading: true,
 };
 
 export default state;

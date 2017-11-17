@@ -36,3 +36,9 @@ export function getMovieReviews(params) {
     return res.json();
   });
 }
+//详细长评
+export function getReviewsFull(reviewsId) {
+  return fetch(`/api/movie/review/${reviewsId}?apikey=${apiKey}`).then(res => {
+    return res.json();
+  })
+}
