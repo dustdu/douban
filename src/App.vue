@@ -18,7 +18,7 @@
           @click="search"
         >搜索</div>
       </x-header>
-      <keep-alive exclude="movieShow,movieComments,reviewsFull">
+      <keep-alive exclude="movieShow,movieComments,reviewsFull,movieSearch">
         <router-view></router-view>
       </keep-alive>
       <tabbar 
@@ -92,7 +92,7 @@
     methods: {
       search() {
         this.$router.push({
-          name: "search"
+          name: "searchmovie"
         });
       }
     }

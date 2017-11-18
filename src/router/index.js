@@ -8,7 +8,7 @@ import MovieTop250 from '@/pages/movie-top250'
 import MovieShow from '@/pages/movie-show'
 import MovieComments from '@/pages/movie-comments'
 import Reviews from '@/pages/reviews'
-import search from '@/components/search'
+import Search from '@/pages/movie-search'
 
 
 
@@ -49,9 +49,9 @@ export default new Router({
       component: Reviews
     },
     {
-      path: '/search',
-      name: 'search',
-      component: search
+      path: '/searchmovie',
+      name: 'searchmovie',
+      component: Search
     },
     
   ]

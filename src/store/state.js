@@ -47,6 +47,9 @@ const state = {
   //完整长评
   reviewsFull: {},
   reviewsFullLoading: true,
+  //电影搜索
+  movieSearchData: {},
+  movieSearchLoading: true
 };
 
 export default state;

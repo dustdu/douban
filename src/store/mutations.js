@@ -90,8 +90,18 @@ const mutations = {
     state.reviewsFull = data;
     state.reviewsFullLoading = false;
   },
+  //详细长评loadig
   [types.REVIEWS_FULL_LOADING](state) {
     state.reviewsFullLoading = true;
+  },
+  //电影搜索
+  [types.MOVIE_SEARCH](state, data) {
+    state.movieSearchData = data;
+    state.movieSearchLoading = false;
+  },
+  //电影搜索loading
+  [types.MOVIE_SEARCH_LOADING](state) {
+    state.movieSearchLoading = true;
   }
 
 }

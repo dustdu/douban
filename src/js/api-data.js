@@ -42,3 +42,15 @@ export function getReviewsFull(reviewsId) {
     return res.json();
   })
 }
+//电影搜索
+export function searchMovies(value) {
+  return fetch(`/api/movie/search?q=${value}&apikey=${apiKey}`).then(res => {
+    return res.json();
+  })
+}
+//电影tag
+export function tagMovies(tag) {
+  return fetch(`/api/movie/search?tag=${tag}&apikey=${apiKey}`).then(res => {
+    return res.json();
+  })
+}

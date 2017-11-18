@@ -47,4 +47,15 @@ export const getReviewsFull = ({ commit },reviewsId) => {
         commit(types.REVIEWS_FULL,data);
     });
 }
-
+//电影搜索
+export const searchMovies = ({ commit },value) => {
+    getData.searchMovies(value).then((data) => {
+        commit(types.MOVIE_SEARCH,data);
+    })
+}
+//电影标签搜索
+export const tagMovies = ({ commit },tag) => {
+    getData.tagMovies(tag).then((data) => {
+        commit(types.MOVIE_SEARCH,data);
+    })
+}

@@ -40,3 +40,7 @@ export const COMMENTS_CLEAN = 'COMMENTS_CLEAN'
 export const REVIEWS_FULL = 'REVIEWS_FULL'
 //详细长评loading
 export const REVIEWS_FULL_LOADING = 'REVIEWS_FULL_LOADING'
+//电影搜索
+export const MOVIE_SEARCH = 'MOVIE_SEARCH'
+//电影搜索loading
+export const MOVIE_SEARCH_LOADING = 'MOVIE_SEARCH_LOADING'
