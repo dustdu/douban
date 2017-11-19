@@ -17,23 +17,29 @@ export const BODY_TOP = 'BODY_TOP'
 //底部距离
 export const BODY_BOTTOM = 'BODY_BOTTOM'
 //热映
-export const HOT_MOVIE = 'HOT_MOVIE'
+export const MOVIES_HOT = 'MOVIES_HOT'
+//热映加载
+export const MOVIES_HOT_ADD = 'MOVIES_HOT_ADD'
 //即将上映
-export const COMING_MOVIE = 'COMING_MOVIE'
+export const MOVIES_COMING = 'MOVIES_COMING'
+//即将上映加载
+export const MOVIES_COMING_ADD = 'MOVIES_COMING_ADD'
 //top250
-export const TOP250_MOVIE = 'TOP250_MOVIE'
+export const MOVIES_TOP250 = 'MOVIES_TOP250'
+//top250加载
+export const MOVIES_TOP250_ADD = 'MOVIES_TOP250_ADD'
 //电影信息
 export const MOVIE_VIEW = 'MOVIE_VIEW'
 //电影详细页面loading
 export const MOVIE_LOADING = 'MOVIE_LOADING'
 //电影短评
 export const MOVIE_COMMENTS = 'MOVIE_COMMENTS'
-//电影短评loading
-export const COMMENTS_LOADING = 'COMMENTS_LOADING'
+//电影短评加载
+export const COMMENTS_ADD = 'COMMENTS_ADD'
 //电影长评
 export const MOVIE_REVIEWS = 'MOVIE_REVIEWS'
-//电影长评loading
-export const REVIEWS_LOADING = 'REVIEWS_LOADING'
+//电影长评加载
+export const REVIEWS_ADD = 'REVIEWS_ADD'
 //清除评论信息
 export const COMMENTS_CLEAN = 'COMMENTS_CLEAN'
 //详细长评
@@ -44,3 +50,7 @@ export const REVIEWS_FULL_LOADING = 'REVIEWS_FULL_LOADING'
 export const MOVIE_SEARCH = 'MOVIE_SEARCH'
 //电影搜索loading
 export const MOVIE_SEARCH_LOADING = 'MOVIE_SEARCH_LOADING'
+//电影搜索加载
+export const MOVIE_SEARCH_ADD = 'MOVIE_SEARCH_ADD'
+//清除搜索结果
+export const MOVIE_SEARCH_CLEAN = 'MOVIE_SEARCH_CLEAN'

@@ -56,6 +56,7 @@
 
 <script type="text/ecmascript-6">
 	import Scroll from '../../components/scroll'
+	import {imgUrl} from '../../js/data-process'
 	export default {
 		components: {
 			Scroll
@@ -83,10 +84,7 @@
 		},
 		methods: {
 			setUrl(url) {
-				if (url !== undefined) {
-					let urlO = url.replace("https://", "https://images.weserv.nl/?url=");
-					return urlO;
-				}
+				return imgUrl(url);
 			},
 		}
 	}

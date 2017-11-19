@@ -11,20 +11,26 @@ const state = {
   bodyBottom: '53px',
   //
   //热映
-  hotData: {
-    movieList: {},
-    loading: true
-  },
+  //moviesHotMess: {},
+  moviesHotList: [],
+  moviesHotAdd: false,
+  moviesHotMore: true,
+  moviesHotLoading: true,
+  //
   //即将上映
-  comingData: {
-    movieList: {},
-    loading: true
-  },
+  //moviesComingMess: {},
+  moviesComingList: [],
+  moviesComingAdd: false,
+  moviesComingMore: true,
+  moviesComingLoading: true,
+  //
   //top250
-  top250Data: {
-    movieList: {},
-    loading: true
-  },
+  //moviesTop250Mess: {},
+  moviesTop250List: [],
+  moviesTop250Add: false,
+  moviesTop250More: true,
+  moviesTop250Loading: true,
+  //
   //电影信息
   movieData: {
     movieMess: {
@@ -37,19 +43,21 @@ const state = {
   //短评
   commentsMess: {},
   commentsList: [],
-  commentsLoading: true,
+  commentsAdd: false,
   commentsMore: true,
   //长评
   reviewsMess: {},
   reviewsList: [],
-  reviewsLoading: true,
+  reviewsAdd: false,
   reviewsMore: true,
   //完整长评
   reviewsFull: {},
   reviewsFullLoading: true,
   //电影搜索
-  movieSearchData: {},
-  movieSearchLoading: true
+  movieSearchData: [],
+  movieSearchLoading: true,
+  movieSearchAdd: false,
+  movieSearchMore: true
 };
 
 export default state;

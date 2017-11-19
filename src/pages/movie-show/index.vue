@@ -56,16 +56,30 @@
 								v-text="average"
 							></div>
 							<ul class="list">
-								<li v-text="durations"></li>
-								<li v-text="countries"></li>
-								<li v-text="genres"></li>
-								<li v-text="pubdate"></li>
+								<li 
+									v-if="durations"
+									v-text="durations"
+								></li>
+								<li 
+									v-if="durations"
+									v-text="countries"
+								></li>
+								<li
+									v-if="durations"
+									v-text="genres"
+								></li>
+								<li 
+									v-text="pubdate"
+								></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 				
-				<div class="plot">
+				<div 
+					class="plot"
+					v-if="summary"
+				>
 					<!-- common.js:67 Uncaught (in promise) {message: "The message port closed before a response was received."} -->
 					<!-- 文字的容器是<p>报错 -->
 					<div 
@@ -83,26 +97,34 @@
 					title="演职人员"
 					:imgData="actorData"
 					imgHeight="182px"
+					v-if="actorData.length"
 				></img-scroll-x>
 				<img-scroll-x 
 					:wrapWidth="postWidth"
 					title="剧照"
 					:imgData="postData"
 					imgHeight="90px"
+					v-if="postData.length"
 				></img-scroll-x>
 				<div class="comment">
 					<h2>热评</h2>
-					<div>
-						<comment 
-							v-for="item in movieData.movieMess.popular_comments" 
-							:comData="item" 
-							:key="item.id"
-						></comment>
+					<div v-if="hasComment()">
+						<div>
+							<comment 
+								v-for="item in movieData.movieMess.popular_comments" 
+								:comData="item" 
+								:key="item.id"
+							></comment>
+						</div>
+						<div 
+							class="moreComment" 
+							@click="getComList(movieData.movieMess.id)"
+						>更多评论</div>
 					</div>
 					<div 
-						class="moreComment" 
-						@click="getComList(movieData.movieMess.id)"
-					>更多评论</div>
+						class="noComment"
+						v-else
+					>抱歉，没有评论。。。 ┑(￣▽ ￣)┍</div>
 				</div>
 			</div>
 		</scroll>
@@ -114,7 +136,8 @@
 	import Loading from 'vux/src/components/loading'
 	import Scroll from '../../components/scroll'
 	import ImgScrollX from '../../components/img-scroll-x'
-	import { mapGetters, mapMutations } from 'vuex'
+	import { mapGetters, mapMutations,mapState,mapActions } from 'vuex'
+	import {imgUrl} from '../../js/data-process'
 	export default {
 		name: 'movieShow',
 		components: {
@@ -130,7 +153,7 @@
 			}
 		},
 		created() {
-			this.$store.dispatch("getMovieView", this.$route.params.movieId);
+			this.getMovieView(this.$route.params.movieId);
 			this.showHeader(true);
 			this.showBack(true);
 			this.headBack(true);
@@ -146,9 +169,9 @@
 			this.movieLoading();
 		},
 		computed: {
-			movieData() {
-				return this.$store.state.movieData;
-			},
+			...mapState([
+				'movieData'
+			]),
 			...mapGetters([
 				'wrapImg',
 				'movieName',
@@ -174,10 +197,7 @@
 				});
 			},
 			setUrl(url) {
-				if (url !== undefined) {
-					let urlO = url.replace("https://", "https://images.weserv.nl/?url=");
-					return urlO;
-				}
+				return imgUrl(url);
 			},
 			//评论列表
 			getComList(movieId) {
@@ -188,6 +208,15 @@
 					}
 				});
 			},
+			//有没有评论
+			hasComment(){
+				if (this.movieData.movieMess.popular_comments) {
+					return this.movieData.movieMess.popular_comments.length?true:false;
+				}
+			},
+			...mapActions([
+				'getMovieView'
+			]),
 			...mapMutations({
 				showHeader: 'SHOW_HEADER',
 				showBack: 'SHOW_BACK',
@@ -255,7 +284,7 @@
 		}
 		.movieBox {
 			position: absolute;
-			top: 95px;
+			top: 90px;
 			z-index: 10;
 			width: 100%;
 			.moviePic {
@@ -283,7 +312,8 @@
 						font-size: 20px;
 						font-weight: bold;
 						color: white;
-						line-height: 26px;
+						line-height: 28px;
+						height: 28px;
 					}
 					.aka {
 						font-size: 14px;
@@ -297,7 +327,7 @@
 					height: 35px;
 					background: #00a251;
 					position: absolute;
-					top: 55px;
+					top: 62px;
 					right: 30px;
 					color: white;
 					line-height: 35px;
@@ -340,6 +370,13 @@
 			line-height: 50px;
 			text-align: center;
 			border-bottom: 1px solid #00bb5e;
+		}
+		.noComment {
+			height: 150px;
+			font-size: 18px;
+			color:#aaa;
+			line-height: 150px;
+			text-align: center;
 		}
 		.moreComment {
 			border-top: 1px solid #00bb5e;

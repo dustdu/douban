@@ -28,7 +28,7 @@ export const durations = state => {
 export const countries = state => {
   let countries = state.movieData.movieMess.countries;
   if (countries) {
-    return dataProcess.arrConnect(countries);
+    return countries.length !=0?dataProcess.arrConnect(countries):'地区未知';
   }
 }
 
@@ -36,7 +36,7 @@ export const countries = state => {
 export const genres = state => {
   let genres = state.movieData.movieMess.genres;
   if (genres) {
-    return dataProcess.arrConnect(genres);
+    return genres.length !=0 ? dataProcess.arrConnect(genres):'类型未知';
   }
 }
 
@@ -118,6 +118,8 @@ export const postData = state => {
       }
     });
     return postData;
+  }else{
+    return [];
   }
 
 }

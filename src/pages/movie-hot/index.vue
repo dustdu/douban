@@ -1,20 +1,27 @@
 <template>
   <div style="height: 100%;">
     <loading 
-      v-model="hotData.loading" 
+      :show="moviesHotLoading" 
       text="加载中..."
     ></loading>
     <scroll 
-      v-show="!hotData.loading" 
-      :data="hotData.movieList.subjects" 
+      v-show="!moviesHotLoading" 
+      :data="moviesHotList" 
+      :pullup="pullup"
+      @scrollToEnd="getMoreHotMovies"
       class="wrap"
     >
       <div>
         <movie-li 
-          v-for="item in hotData.movieList.subjects" 
+          v-for="item in moviesHotList" 
           :key="item.id" 
           :movieData="item"
         ></movie-li>
+        <load-more v-if="moviesHotMore"></load-more>
+        <div 
+          class="noneMore"
+          v-else
+        >抱歉，没有更多搜索结果了 ┑(￣▽ ￣)┍</div>
       </div>
     </scroll>
   </div>
@@ -24,15 +31,29 @@
   import MovieLi from '../../components/movie-li'
   import Scroll from '../../components/scroll'
   import Loading from 'vux/src/components/loading'
-  import { mapMutations } from 'vuex'
+  import LoadMore from "vux/src/components/load-more"
+  import { mapMutations,mapState,mapActions } from 'vuex'
+  import { params } from '../../js/data-process'
   export default {
     components: {
       MovieLi,
       Scroll,
-      Loading
+      Loading,
+      LoadMore
+    },
+    data () {
+      return {
+        pullup: true,
+        start: 0,
+        startCount: 15,
+        addCount: 8
+      }
     },
     created() {
-      this.$store.dispatch("getHotMovies");
+      this.getHotMovies({
+        start: this.start,
+        count: this.startCount
+      });
     },
     activated(){
       this.showHeader(true);
@@ -46,11 +67,28 @@
       this.bodyBottom('53px');
     },
     computed: {
-      hotData() {
-        return this.$store.state.hotData;
-      }
+      ...mapState([
+        'moviesHotList',
+        'moviesHotAdd',
+        'moviesHotMore',
+        'moviesHotLoading',
+      ])
     },
     methods: {
+      getMoreHotMovies(){
+        if (this.moviesHotAdd||!this.moviesHotMore) {
+          return;
+        }
+        this.moviesAdd();
+        this.start = params(this.start,15,this.addCount);
+        this.getHotMovies({
+          start: this.start,
+          count: this.addCount
+        });
+      },
+      ...mapActions([
+        'getHotMovies'
+      ]),
       ...mapMutations({
         showHeader: 'SHOW_HEADER',
         showBack: 'SHOW_BACK',
@@ -60,8 +98,8 @@
         showBottom: 'SHOW_BOTTOM',
         selected: 'SELECTED',
         bodyTop: 'BODY_TOP',
-        bodyBottom: 'BODY_BOTTOM'
-        
+        bodyBottom: 'BODY_BOTTOM',
+        moviesAdd: 'MOVIES_HOT_ADD'
       })
     }
   }
@@ -72,5 +110,11 @@
   height: 100%;
   overflow: hidden;
   background-color: #efefef;
+  .noneMore {
+    height: 25px;
+    font-size: 14px;
+    line-height: 25px;
+    text-align: center;
+  }
 }
 </style>

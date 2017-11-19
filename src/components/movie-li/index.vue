@@ -11,32 +11,25 @@
 		</div>
 		<ul class="mess">
 			<li class="messTitle">{{movieData.title}}</li>
-			<li class="actColor">导演：
-				<span 
-					v-for="(item,index) in movieData.directors" 
-					:key="item.id"
-				>
-					<span v-if="index>0">/</span>{{item.name}}
-				</span>
-			</li>
-			<li class="actColor">主演：
-				<span 
-					v-for="(item,index) in movieData.casts" 
-					:key="item.id"
-				>
-						<span v-if="index>0">/</span>{{item.name}}
-				</span>
-			</li>
+			<li class="actColor">导演：{{directors(movieData.directors)}}</li>
+			<li class="actColor">主演：{{directors(movieData.casts)}}</li>
 			<li class="rat clearfix">
 				<span>评分：</span>
-				<span 
-					v-for="item in Math.ceil(movieData.rating.average/2)" class="fa fa-star" 
-					:key="item.id"
-				></span>
-				<span 
-					v-for="item in 5-Math.ceil(movieData.rating.average/2)" class="fa fa-star-o" 
-					:key="item.id"
-				></span>
+				<span v-if="movieData.rating.average !== 0">
+					<span 
+						v-for="item in Math.ceil(movieData.rating.average/2)" class="fa fa-star" 
+						:key="item.id"
+					></span>
+					<span 
+						v-for="item in 5-Math.ceil(movieData.rating.average/2)" class="fa fa-star-o" 
+						:key="item.id"
+					></span>
+					<span 
+						class="average" 
+						v-text="movieData.rating.average"
+					></span>
+				</span>
+				<span v-else>暂无评分</span>
 			</li>
 			<li class="collect">{{movieData.collect_count}}人看过</li>
 		</ul>
@@ -63,6 +56,17 @@
 			},
 			setUrl(url) {
 				return imgUrl(url);
+			},
+			//导演
+			directors(directors) {
+				let director = '';
+				directors.forEach((item, index) => {
+					if (index > 0) {
+						director += '/';
+					}
+					director += item.name;
+				});
+				return director;
 			}
 		}
 	}

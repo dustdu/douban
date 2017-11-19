@@ -3,11 +3,11 @@
     <div class="wrap">
       <tab :line-width="lineWidth">
         <tab-item 
-          :selected="selected" 
+          :selected="selected == 'comment'" 
           @on-item-click="comment"
         >短评</tab-item>
         <tab-item 
-          :selected="!selected" 
+          :selected="selected == 'review'" 
           @on-item-click="review"
         >影评</tab-item>
       </tab>
@@ -15,7 +15,7 @@
       <scroll
         :data="commentsList"
         class="comWrap"
-        v-show="selected"
+        v-show="selected == 'comment'"
         :pullup="pullup"
         @scrollToEnd="getComments"
       >
@@ -25,13 +25,17 @@
             :key="item.id"
             :comData="item"
           ></comment>
-          <load-more v-show="show"></load-more>
+          <load-more v-if="commentsMore"></load-more>
+          <div 
+            class="noneMore"
+            v-else
+          >抱歉，没有更多评论了 ┑(￣▽ ￣)┍</div>
         </div>
       </scroll>
       <scroll
         :data="reviewsList"
         class="comWrap"
-        v-show="!selected"
+        v-show="selected == 'review'"
         :pullup="pullup"
         @scrollToEnd="getReviews"
       >
@@ -42,7 +46,11 @@
             :comData="item"
             @toReviews="toReviews(reviewsMess.id,item.id)"
           ></comment>
-          <load-more v-show="show"></load-more>
+          <load-more v-if="reviewsMore"></load-more>
+          <div 
+            class="noneMore"
+            v-else
+          >抱歉，没有更多评论了 ┑(￣▽ ￣)┍</div>
         </div>
       </scroll>
     </div>
@@ -68,10 +76,9 @@
     },
     data() {
       return {
-        selected: true,
+        selected: 'comment',
         lineWidth: 2,
         click: false,
-        show: true,
         pullup: true,
         startCount: 20,
         addCount: 8,
@@ -103,20 +110,20 @@
       ...mapState([
         'commentsMess',
         'commentsList',
-        'commentsLoading',
+        'commentsAdd',
         'commentsMore',
         'reviewsMess',
         'reviewsList',
-        'reviewsLoading',
+        'reviewsAdd',
         'reviewsMore'
       ])
     },
     methods: {
       comment() {
-        this.selected = !this.selected;
+        this.selected = 'comment';
       },
       review() {
-        this.selected = !this.selected;
+        this.selected = 'review';
         if (this.click) {
           return;
         }
@@ -124,8 +131,7 @@
         this.click = true;
       },
       getComments(){
-        if (!this.commentsLoading || !this.commentsMore) {
-          console.log('正在加载');
+        if (this.commentsAdd || !this.commentsMore) {
           return;
         }
         this.addComments();
@@ -137,8 +143,7 @@
         });
       },
       getReviews() {
-        if (!this.reviewsLoading || !this.reviewsMore) {
-          console.log('正在加载');
+        if (this.reviewsAdd || !this.reviewsMore) {
           return;
         }
         this.addReviews();
@@ -167,8 +172,8 @@
         showBottom: 'SHOW_BOTTOM',
         bodyTop: 'BODY_TOP',
         bodyBottom: 'BODY_BOTTOM',
-        addComments: 'COMMENTS_LOADING',
-        addReviews: 'REVIEWS_LOADING',
+        addComments: 'COMMENTS_ADD',
+        addReviews: 'REVIEWS_ADD',
         commentsClean: 'COMMENTS_CLEAN'
       }),
       ...mapActions([
@@ -194,6 +199,12 @@
       }
       .comWrap{
         height: 100%;
+        .noneMore {
+          height: 35px;
+          font-size: 14px;
+          line-height: 35px;
+          text-align: center;
+        }
       }
     }
   }

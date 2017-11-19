@@ -50,16 +50,23 @@
         style="height:100%;"
       >
         <scroll 
-          v-if="movieSearchData.subjects && movieSearchData.subjects.length !== 0"
+          v-if="movieSearchData.length !== 0"
           :data="movieSearchData"
           class="searchBox"
+          :pullup="pullup"
+          @scrollToEnd="getMoreResult"
         >
           <div class="searchList">
             <movie-li 
-              v-for="item in movieSearchData.subjects" 
+              v-for="item in movieSearchData" 
               :key="item.id" 
               :movieData="item"
             ></movie-li>
+            <load-more v-if="movieSearchMore"></load-more>
+            <div 
+              class="noneMore"
+              v-else
+            >抱歉，没有更多搜索结果了 ┑(￣▽ ￣)┍</div>
           </div>
         </scroll>
         <div 
@@ -79,14 +86,17 @@
   import MovieLi from '../../components/movie-li'
   import Loading from 'vux/src/components/loading'
   import Search from 'vux/src/components/Search'
+  import LoadMore from "vux/src/components/load-more"
   import Scroll from '../../components/scroll'
   import { mapMutations,mapActions,mapState } from 'vuex'
+  import { params } from '../../js/data-process'
   export default {
     name: 'movieSearch',
     components: {
       MovieLi,
       Loading,
       Search,
+      LoadMore,
       Scroll
     },
     data() {
@@ -98,7 +108,13 @@
         },
         placeholder: "搜索电影/影人",
         value: "",
-        isTag: true
+        isTag: true,
+        pullup: true,
+        srarchType: 'search',
+        start: 0,
+        //每次最多20
+        startCount: 20,
+        addCount: 8
       };
     },
     created() {
@@ -110,10 +126,15 @@
     mounted() {
       this.$refs.search.setFocus();
     },
+    beforeDestroy () {
+      this.movieSearchClean();
+    },
     computed: {
       ...mapState([
         'movieSearchData',
-        'movieSearchLoading'
+        'movieSearchLoading',
+        'movieSearchAdd',
+        'movieSearchMore'
       ])
     },
     methods: {
@@ -122,7 +143,11 @@
       },
       //输入搜索
       onSubmit() {
-        this.searchMovies(this.value);
+        this.searchMovies({
+          value: this.value,
+          start: this.start,
+          count: this.startCount
+        });
         this.searchLoading();
         this.$refs.search.setBlur();
         if (this.isTag) {
@@ -131,19 +156,50 @@
       },
       //通过标签获取
       searchTag(tag) {
-        this.tagMovies(tag);
+        this.srarchType = 'tag';
+        this.value = tag;
+        this.tagMovies({
+          tag: tag,
+          start: this.start,
+          count: this.startCount
+        });
         this.searchLoading();
         this.$refs.search.setBlur();
         if (this.isTag) {
           this.isTag = !this.isTag;
         }
       },
+      //加载更多
+      getMoreResult() {
+        if (this.movieSearchAdd||!this.movieSearchMore) {
+          return;
+        }
+        this.searchAdd();
+        this.start = params(this.start,20,this.addCount);
+        //搜索电影的方式
+        if (this.srarchType == 'search') {
+          this.searchMovies({
+            value: this.value,
+            start: this.start,
+            count: this.addCount
+          });
+        }else{
+          this.tagMovies({
+            tag: this.value,
+            start: this.start,
+            count: this.addCount
+          });
+        }
+        
+      },
       ...mapMutations({
         showHeader: 'SHOW_HEADER',
         showBottom: 'SHOW_BOTTOM',
         bodyTop: 'BODY_TOP',
         bodyBottom: 'BODY_BOTTOM',
-        searchLoading: 'MOVIE_SEARCH_LOADING'
+        searchLoading: 'MOVIE_SEARCH_LOADING',
+        searchAdd: 'MOVIE_SEARCH_ADD',
+        movieSearchClean: 'MOVIE_SEARCH_CLEAN'
       }),
       ...mapActions([
         'searchMovies',
@@ -187,6 +243,12 @@
       .searchList {
         box-sizing: border-box;
         padding-top: 44px;
+        .noneMore {
+          height: 25px;
+          font-size: 14px;
+          line-height: 25px;
+          text-align: center;
+        }
       }
     }
     .noMess {

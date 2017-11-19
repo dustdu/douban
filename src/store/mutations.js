@@ -31,19 +31,43 @@ const mutations = {
   },
   //
   //热映
-  [types.HOT_MOVIE](state, data) {
-    state.hotData.movieList = data;
-    state.hotData.loading = false;
+  [types.MOVIES_HOT](state, data) {
+    state.moviesHotList = state.moviesHotList.concat(data.subjects);
+    if (data.subjects.length === 0) {
+      state.moviesHotMore = false;
+    }
+    state.moviesHotAdd = false;
+    state.moviesHotLoading = false;
+  },
+  //热映加载
+  [types.MOVIES_HOT_ADD](state) {
+    state.moviesHotAdd = true;
   },
   //即将上映
-  [types.COMING_MOVIE](state, data) {
-    state.comingData.movieList = data;
-    state.comingData.loading = false;
+  [types.MOVIES_COMING](state, data) {
+    state.moviesComingList = state.moviesComingList.concat(data.subjects);
+    if (data.subjects.length === 0) {
+      state.moviesComingMore = false;
+    }
+    state.moviesComingAdd = false;
+    state.moviesComingLoading = false;
+  },
+  //即将上映加载
+  [types.MOVIES_COMING_ADD](state) {
+    state.moviesComingAdd = true;
   },
   //top250
-  [types.TOP250_MOVIE](state, data) {
-    state.top250Data.movieList = data;
-    state.top250Data.loading = false;
+  [types.MOVIES_TOP250](state, data) {
+    state.moviesTop250List = state.moviesTop250List.concat(data.subjects);
+    if (data.subjects.length === 0) {
+      state.moviesTop250More = false;
+    }
+    state.moviesTop250Add = false;
+    state.moviesTop250Loading = false;
+  },
+  //top250加载
+  [types.MOVIES_TOP250_ADD](state) {
+    state.moviesTop250Add = true;
   },
   //电影信息
   [types.MOVIE_VIEW](state, data) {
@@ -58,27 +82,27 @@ const mutations = {
   [types.MOVIE_COMMENTS](state, data) {
     state.commentsList = state.commentsList.concat(data.comments);
     state.commentsMess = data.subject;
-    if (data.comments.length < data.count) {
+    if (data.comments.length === 0) {
       state.commentsMore = false;
     }
-    state.commentsLoading = true;
+    state.commentsAdd = false;
   },
-  //短评数据加载loading
-  [types.COMMENTS_LOADING](state) {
-    state.commentsLoading = false;
+  //短评数据加载
+  [types.COMMENTS_ADD](state) {
+    state.commentsAdd = true;
   },
   //长评数据
   [types.MOVIE_REVIEWS](state, data) {
     state.reviewsList = state.reviewsList.concat(data.reviews);
     state.reviewsMess = data.subject;
-    if (data.reviews.length < data.count) {
+    if (data.reviews.length === 0) {
       state.reviewsMore = false;
     }
-    state.reviewsLoading = true;
+    state.reviewsAdd = false;
   },
-  //长评数据加载loading
-  [types.REVIEWS_LOADING](state) {
-    state.reviewsLoading = false;
+  //长评数据加载
+  [types.REVIEWS_ADD](state) {
+    state.reviewsAdd = true;
   },
   //清除评论信息
   [types.COMMENTS_CLEAN](state) {
@@ -96,13 +120,24 @@ const mutations = {
   },
   //电影搜索
   [types.MOVIE_SEARCH](state, data) {
-    state.movieSearchData = data;
+    state.movieSearchData = state.movieSearchData.concat(data.subjects);
+    //有时候中间数据缺失，不能比较获取到的length与count
+    if (data.subjects.length === 0) {
+      state.movieSearchMore = false;
+    }
     state.movieSearchLoading = false;
+    state.movieSearchAdd = false;
+  },
+  //清除搜索结果
+  [types.MOVIE_SEARCH_CLEAN](state) {
+    state.movieSearchData = [];
   },
   //电影搜索loading
   [types.MOVIE_SEARCH_LOADING](state) {
     state.movieSearchLoading = true;
-  }
-
+  },
+  [types.MOVIE_SEARCH_ADD](state) {
+    state.movieSearchAdd = true;
+  },
 }
 export default mutations

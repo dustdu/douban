@@ -47,7 +47,8 @@
   import Scroll from '../../components/scroll'
   import Loading from 'vux/src/components/loading'
   import Divider from 'vux/src/components/divider'
-  import { mapMutations,mapState } from 'vuex'
+  import { mapMutations,mapState,mapActions } from 'vuex'
+  import {imgUrl} from '../../js/data-process'
   export default {
     name: 'reviewsFull',
     components: {
@@ -56,7 +57,7 @@
       Divider
     },
     created() {
-      this.$store.dispatch("getReviewsFull",this.$route.params.reviewsId);
+      this.getReviewsFull(this.$route.params.reviewsId);
       this.showHeader(true);
       this.showBack(true);
       this.headBack(false);
@@ -79,11 +80,11 @@
     },
     methods: {
       setUrl(url) {
-        if (url) {
-          let urlO = url.replace("https://", "https://images.weserv.nl/?url=");
-          return urlO;
-        }
+        return imgUrl(url);
       },
+      ...mapActions([
+        'getReviewsFull'
+      ]),
       ...mapMutations({
         showHeader: 'SHOW_HEADER',
         showBack: 'SHOW_BACK',

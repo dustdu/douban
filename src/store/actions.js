@@ -2,21 +2,21 @@ import * as types from './mutation-types'
 import * as getData from '../js/api-data'
 
 //热映电影数据
-export const getHotMovies = ({ commit }) => {
-    getData.getHotMovies(0, 20).then((data) => {
-        commit(types.HOT_MOVIE,data);
+export const getHotMovies = ({ commit },params) => {
+    getData.getHotMovies(params).then((data) => {
+        commit(types.MOVIES_HOT,data);
     });
 }
 //即将上映电影数据
-export const getComingMovies = ({ commit }) => {
-    getData.getComingMovies(0, 20).then((data) => {
-        commit(types.COMING_MOVIE,data);
+export const getComingMovies = ({ commit },params) => {
+    getData.getComingMovies(params).then((data) => {
+        commit(types.MOVIES_COMING,data);
     });
 }
 //top250电影数据
-export const getTop250Movies = ({ commit }) => {
-    getData.getTop250Movies(0, 20).then((data) => {
-        commit(types.TOP250_MOVIE,data);
+export const getTop250Movies = ({ commit },params) => {
+    getData.getTop250Movies(params).then((data) => {
+        commit(types.MOVIES_TOP250,data);
     });
 }
 //电影详细数据
@@ -48,14 +48,18 @@ export const getReviewsFull = ({ commit },reviewsId) => {
     });
 }
 //电影搜索
-export const searchMovies = ({ commit },value) => {
-    getData.searchMovies(value).then((data) => {
-        commit(types.MOVIE_SEARCH,data);
+export const searchMovies = ({ commit },params) => {
+    getData.searchMovies(params).then((data) => {
+        setTimeout(() => {
+            commit(types.MOVIE_SEARCH,data);
+        }, 100);
     })
 }
 //电影标签搜索
-export const tagMovies = ({ commit },tag) => {
-    getData.tagMovies(tag).then((data) => {
-        commit(types.MOVIE_SEARCH,data);
+export const tagMovies = ({ commit },params) => {
+    getData.tagMovies(params).then((data) => {
+        setTimeout(() => {
+            commit(types.MOVIE_SEARCH,data);
+        }, 100);
     })
 }
