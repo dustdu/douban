@@ -11,8 +11,8 @@
 		</div>
 		<ul class="mess">
 			<li class="messTitle">{{movieData.title}}</li>
-			<li class="actColor">导演：{{directors(movieData.directors)}}</li>
-			<li class="actColor">主演：{{directors(movieData.casts)}}</li>
+			<li class="actColor">导演：{{movieData.directors.length?directors(movieData.directors):'未知'}}</li>
+			<li class="actColor">主演：{{movieData.casts.length?directors(movieData.casts):'未知'}}</li>
 			<li class="rat clearfix">
 				<span>评分：</span>
 				<span v-if="movieData.rating.average !== 0">
