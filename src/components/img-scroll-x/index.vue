@@ -21,11 +21,10 @@
 			<!-- 设置高度，实例化scroll时不会出现高度问题  -->
 				<div 
 					class="imgList"
-					:style="{height:imgHeight}"
 					v-for="item in imgData" 
 					:key="item.id"
 				>
-					<div>
+					<div :style="{height:imgHeight}">
 						<img 
 							v-if="!item.img" 
 							src="../../assets/img/default-medium.png" 

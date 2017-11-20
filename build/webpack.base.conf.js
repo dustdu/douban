@@ -35,7 +35,8 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src'), resolve('test'),resolve('node_modules/vux/src/mixins/uuid'),resolve('node_modules/vux/src/mixins/multi-items')
+      ]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

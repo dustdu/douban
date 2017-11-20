@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 
 // vue 在启动时生成生产提示。
-Vue.config.productionTip = true
+Vue.config.productionTip = false
 
 import './assets/font-awesome-4.7.0/css/font-awesome.min.css'
 /* eslint-disable no-new */

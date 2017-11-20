@@ -96,7 +96,7 @@
 					:wrapWidth="actorWidth"
 					title="演职人员"
 					:imgData="actorData"
-					imgHeight="182px"
+					imgHeight="128px"
 					v-if="actorData.length"
 				></img-scroll-x>
 				<img-scroll-x 

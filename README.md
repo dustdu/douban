@@ -21,11 +21,12 @@ npm install
 # 开启服务 localhost:8282
 npm run dev
 
-# build for production with minification
+# 打包
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+- 注意跨域
+- t.$t函数报错，改一下名字就行
+- 打包后获取到的图片地址是http,开发时是https，说以处理图片防盗链的函数要改一下
 ```
 
 ## 项目详细描述
@@ -39,6 +40,23 @@ npm run build --report
 - better-scroll 重点解决移动端各种滚动场景，加载，刷新等，将来可能支持PC
 - vux： 基于WeUI和Vue(2.x)开发的移动端UI组件库
 - font-awesome ： 可缩放的矢量图标
+
+### 开发问题
+
+- 数据每次最多获取100条
+- 豆瓣图片加了防外链设置，直接获取图片地址后使用会出现403，要进行设置：可以使用`https://images.weserv.nl/`代替`https://`但是build之后项目获取到的是`http://`的图片
+- 电影条目信息api中的popular_comments每次获取刷新数据是变化的
+- 这样使用组件
+
+      import { XHeader, Tabbar, TabbarItem } from "vux"
+
+  会有警告
+
+      > VUX: 如果你看到这一行，说明 vux-loader 配置有问题或者代码书写规范的原因导致无法解析成按需引入组件，会导致打包体积过大。请升级到最新版本 vux-loader，建议开启 eslint(standard)。
+
+  这样引入
+
+      import XHeader from "vux/src/components/x-header"
 
 ### 项目布局
 
@@ -63,6 +81,7 @@ npm run build --report
 │  │  ├─movie-coming                    // 即将上映页面
 │  │  ├─movie-comments                  // 评论页面
 │  │  ├─movie-hot                       // 热映页面
+│  │  ├─movie-search                    // 电影搜索
 │  │  ├─movie-show                      // 电影详情页
 │  │  └─movie-top250                    // top250页面
 │  ├─router                             // 路由管理
